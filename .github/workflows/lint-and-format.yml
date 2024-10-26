@@ -1,0 +1,38 @@
+name: Lint and Format
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+  pull_request:
+    branches:
+      - main
+      - dev
+
+jobs:
+  lint-and-format:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code from the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      # Step 2: Set up Node.js environment
+      - name: Set Up Node.js Environment
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18' # Set this to your project's Node.js version
+
+      # Step 3: Install dependencies with npm, using --legacy-peer-deps to avoid peer dependency conflicts
+      - name: Install Dependencies
+        run: npm install
+
+      # Step 4: Run Prettier for code formatting
+      - name: Run Prettier (Code Formatting)
+        run: npm run format
+
+      # Step 5: Run ESLint for code linting
+      - name: Run ESLint (Code Linting)
+        run: npm run lint
