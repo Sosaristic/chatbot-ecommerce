@@ -3,7 +3,7 @@ import './App.css';
 const App = () => {
   return (
     <>
-      <h2>Landing page and i want to see changes when i commit</h2>
+      <h2>Welcome to chatbot e-commerce</h2>
     </>
   );
 };
