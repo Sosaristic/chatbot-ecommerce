@@ -1,13 +1,14 @@
 import { createBrowserRouter } from 'react-router-dom';
-import App from '@/App';
+
 import { AppLayout } from '@/components/layouts';
+import { Home } from '@/pages';
 
 export const router = createBrowserRouter([
   {
     path: '/',
     element: (
       <AppLayout>
-        <App />
+        <Home />
       </AppLayout>
     ),
   },
