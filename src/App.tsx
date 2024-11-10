@@ -19,8 +19,6 @@ const App = () => {
 
   return (
     <>
-      <h2 className="text-primary-def">Welcome to chatbot e-commerce</h2>
-
       {loading && <div>Loading...</div>}
       <div className="container grid gap-10 grid-col-2 md:grid-cols-3 lg:grid-cols-4">
         {products?.map((product) => (

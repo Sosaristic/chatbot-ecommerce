@@ -1,9 +1,14 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from '@/App';
+import { AppLayout } from '@/components/layouts';
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: (
+      <AppLayout>
+        <App />
+      </AppLayout>
+    ),
   },
 ]);
