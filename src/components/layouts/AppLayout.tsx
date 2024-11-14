@@ -11,11 +11,11 @@ const navLinks = [
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex flex-col min-h-screen ">
-      <header className="flex items-center px-8 py-10">
+    <div className="flex flex-col min-h-screen">
+      <header className="fixed z-50 flex items-center w-screen px-8 py-10 mb-[10rem] bg-white-def">
         <div className="flex items-center flex-[2]">
           <img src={Logo} alt="" height={40} width={40} />
-          <h2>OmniMart</h2>
+          <h2 className="text-xl font-bold">OmniMart</h2>
         </div>
         <nav className="flex items-center flex-[3]">
           <ul className="flex items-center flex-1 gap-4 justify-evenly">
