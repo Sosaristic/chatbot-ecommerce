@@ -7,9 +7,9 @@ type sectionedProps = {
 };
 const Sectioned = ({ title, products }: sectionedProps) => {
   return (
-    <section className="container mt-[10rem] overflow-auto">
-      <h2 className="text-2xl font-bold">{title}</h2>
-      <div className="relative flex">
+    <section className="container  my-8 ">
+      <h2 className="text-2xl my-8 font-bold">{title}</h2>
+      <div className="relative flex gap-8 overflow-auto">
         {products.map((product) => (
           <div className="flex-1 w-1/4 min-w-[20rem]" key={product.id}>
             <ProductCard

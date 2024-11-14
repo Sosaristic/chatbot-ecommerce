@@ -22,6 +22,11 @@ const Home = () => {
         title="New Arrivals"
         products={products?.length ? products.slice(0, 10) : []}
       />
+
+      <Sectioned
+        title="Top Picks"
+        products={products?.length ? products.slice(0, 10) : []}
+      />
     </>
   );
 };

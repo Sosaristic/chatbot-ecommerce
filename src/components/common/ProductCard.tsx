@@ -12,14 +12,14 @@ type CardProps = {
 
 const ProductCard = ({ img, title, price, rating, count }: CardProps) => {
   return (
-    <div className="min-h-[30rem] w-full flex flex-col relative shadow-sm hover:shadow-md">
-      <div className="flex justify-center bg-grey-800">
+    <div className="min-h-[28rem] w-full flex flex-col relative shadow-sm hover:shadow-md">
+      <div className="flex justify-center">
         <img
           src={img}
           height={100}
           width={200}
           alt=""
-          className=" max-h-full h-[50]"
+          className=" max-h-[200px] h-[50]"
         />
       </div>
       <div className="p-4 mt-auto bg-grey-800">

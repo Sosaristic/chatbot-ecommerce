@@ -1,6 +1,7 @@
 import React from 'react';
 import Logo from '@/assets/logo.svg';
 import { Button } from '../ui/button';
+import { Link } from 'react-router-dom';
 
 const navLinks = [
   { name: 'Electronics', path: '/products/electronics' },
@@ -12,11 +13,11 @@ const navLinks = [
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex flex-col min-h-screen">
-      <header className="fixed z-50 flex items-center w-screen px-8 py-10 mb-[10rem] bg-white-def">
-        <div className="flex items-center flex-[2]">
+      <header className="fixed z-50 flex items-center w-screen px-8 py-10 bg-white-def">
+        <Link to={'/'} className="flex items-center flex-[2]">
           <img src={Logo} alt="" height={40} width={40} />
           <h2 className="text-xl font-bold">OmniMart</h2>
-        </div>
+        </Link>
         <nav className="flex items-center flex-[3]">
           <ul className="flex items-center flex-1 gap-4 justify-evenly">
             {navLinks.map((link) => (
@@ -30,7 +31,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
           <Button>Get Started</Button>
         </div>
       </header>
-      {children}
+      <div className="mt-[7rem]">{children}</div>
     </div>
   );
 };
