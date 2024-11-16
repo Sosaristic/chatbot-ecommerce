@@ -14,7 +14,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex flex-col min-h-screen">
       <header className="fixed z-50 flex items-center w-screen px-8 py-10 bg-white-def">
-        <Link to={'/'} className="flex items-center flex-[2]">
+        <Link to={'/Home'} className="flex items-center flex-[2]">
           <img src={Logo} alt="" height={40} width={40} />
           <h2 className="text-xl font-bold">OmniMart</h2>
         </Link>
