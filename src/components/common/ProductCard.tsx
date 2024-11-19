@@ -1,6 +1,7 @@
 import { formatAmount } from '@/lib/helpers';
 import { GetRating } from '.';
 import { Button } from '../ui/button';
+import { useNavigate } from 'react-router-dom';
 
 type CardProps = {
   img: string;
@@ -8,11 +9,17 @@ type CardProps = {
   price: number;
   rating: number;
   count: number;
+  id: number;
 };
 
-const ProductCard = ({ img, title, price, rating, count }: CardProps) => {
+const ProductCard = ({ img, title, price, rating, count, id }: CardProps) => {
+  const navigate = useNavigate();
   return (
-    <div className="min-h-[28rem] w-full flex flex-col relative shadow-sm hover:shadow-md">
+    <div
+      role="button"
+      onClick={() => navigate(`/products/${id}`)}
+      className="min-h-[28rem] w-full flex flex-col relative shadow-sm hover:shadow-md"
+    >
       <div className="flex justify-center">
         <img
           src={img}

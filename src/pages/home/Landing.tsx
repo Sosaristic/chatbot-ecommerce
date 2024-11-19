@@ -1,4 +1,3 @@
-import { Product } from '@/types/product';
 import { makeApiRequest } from '@/utils/api';
 import { useEffect, useState } from 'react';
 import Sectioned from './Sectioned';
@@ -17,17 +16,17 @@ const Home = () => {
   }, []);
 
   return (
-    <>
+    <div className="flex flex-col gap-10 item-center">
       <Sectioned
         title="New Arrivals"
-        products={products?.length ? products.slice(0, 10) : []}
+        products={products?.length ? products.slice(0, 8) : []}
       />
 
       <Sectioned
         title="Top Picks"
-        products={products?.length ? products.slice(0, 10) : []}
+        products={products?.length ? products.slice(8, 16) : []}
       />
-    </>
+    </div>
   );
 };
 
