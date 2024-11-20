@@ -34,7 +34,7 @@ const validationSchema = yup.object<typeof initialValues>({
 });
 
 const Checkout = () => {
-  const { totalAmount, totalItems } = useCartStore();
+  const { totalAmount, totalItems, clearCart } = useCartStore();
   const [step, setStep] = useState(1);
 
   const { handleChange, values, handleBlur, handleSubmit, errors, touched } =
@@ -43,6 +43,7 @@ const Checkout = () => {
       validationSchema: validationSchema,
       onSubmit: () => {
         setStep(2);
+        clearCart();
       },
     });
 

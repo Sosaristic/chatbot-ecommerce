@@ -14,6 +14,7 @@ type ICart = {
   deleteItem: (product: Product) => void;
   totalAmount: () => number;
   totalItems: () => number;
+  clearCart: () => void;
 };
 
 export const useCartStore = create<ICart>()(
@@ -70,6 +71,7 @@ export const useCartStore = create<ICart>()(
           return acc + item.qty!;
         }, 0);
       },
+      clearCart: () => set({ items: [] }),
     }),
     {
       name: 'user-cart',
