@@ -11,4 +11,5 @@ type Product = {
   category: string;
   image: string;
   rating: Rating;
+  qty?: number;
 };

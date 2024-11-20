@@ -4,11 +4,16 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 type ICart = {
   items: Product[];
   isAppLoading: boolean;
-  actions: {
-    addToCart: (product: Product) => void;
-    isInCart: (product: Product) => boolean;
-    setIsAppLoading: () => void;
-  };
+  setIsAppLoading: () => void;
+
+  addToCart: (product: Product) => void;
+  isInCart: (product: Product) => boolean;
+  increaseQty: (product: Product) => void;
+  decreaseQty: (product: Product) => void;
+  getQty: (product: Product) => number;
+  deleteItem: (product: Product) => void;
+  totalAmount: () => number;
+  totalItems: () => number;
 };
 
 export const useCartStore = create<ICart>()(
@@ -16,28 +21,59 @@ export const useCartStore = create<ICart>()(
     (set, get) => ({
       items: [],
       isAppLoading: true,
-      actions: {
-        addToCart: (product: Product) => {
-          const copy = [...get().items, product];
+      setIsAppLoading: () => set({ isAppLoading: false }),
 
-          return set({
-            items: copy,
-          });
-        },
-        isInCart: (product: Product) => {
-          return get().items.some((item) => item.id === product.id);
-        },
-        setIsAppLoading: () => set({ isAppLoading: false }),
+      addToCart: (product: Product) => {
+        set({ items: [...get().items, { ...product, qty: 1 }] });
+      },
+      isInCart: (product: Product) => {
+        return get().items.some((item) => item.id === product.id);
+      },
+      increaseQty: (product: Product) => {
+        const index = get().items.findIndex((item) => item.id === product.id);
+        if (index === -1) {
+          set({ items: [...get().items, { ...product, qty: 1 }] });
+        } else {
+          const updatedItems = [...get().items];
+          updatedItems[index].qty = updatedItems[index].qty! + 1;
+          set({ items: updatedItems });
+        }
+      },
+      decreaseQty: (product: Product) => {
+        const index = get().items.findIndex((item) => item.id === product.id);
+        if (index !== -1) {
+          const updatedItems = [...get().items];
+          updatedItems[index].qty = updatedItems[index].qty! - 1;
+          set({ items: updatedItems });
+        }
+      },
+      getQty: (product: Product) => {
+        const index = get().items.findIndex((item) => item.id === product.id);
+
+        return get().items[index]?.qty || 0;
+      },
+      deleteItem: (product: Product) => {
+        const index = get().items.findIndex((item) => item.id === product.id);
+        if (index !== -1) {
+          const updatedItems = [...get().items];
+          updatedItems.splice(index, 1);
+          set({ items: updatedItems });
+        }
+      },
+      totalAmount: () => {
+        return get().items.reduce((acc, item) => {
+          return acc + item.price * item.qty!;
+        }, 0);
+      },
+      totalItems: () => {
+        return get().items.reduce((acc, item) => {
+          return acc + item.qty!;
+        }, 0);
       },
     }),
     {
       name: 'user-cart',
       storage: createJSONStorage(() => localStorage),
-      onRehydrateStorage: (state) => {
-        if (state) {
-          state.actions.setIsAppLoading();
-        }
-      },
     }
   )
 );

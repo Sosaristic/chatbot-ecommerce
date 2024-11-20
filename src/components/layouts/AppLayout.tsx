@@ -23,12 +23,8 @@ const CartBadge = () => {
 };
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
-  const { isAppLoading } = useCartStore((state) => state);
-
-  if (isAppLoading) return null;
-
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-background-def">
       <header className="fixed z-50 flex items-center w-screen px-8 py-10 bg-white-def">
         <Link to={'/'} className="flex items-center flex-[2]">
           <img src={Logo} alt="" height={40} width={40} />
@@ -43,10 +39,10 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
             ))}
           </ul>
         </nav>
-        <div className="relative mx-6">
+        <Link to={'/cart'} className="relative mx-12">
           <CartBadge />
           <ShoppingCart size={26} />
-        </div>
+        </Link>
         <div className="relative hidden md:block">
           <Button>Get Started</Button>
         </div>
@@ -54,7 +50,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
           <Menu />
         </button>
       </header>
-      <div className="mt-[7rem] flex flex-col flex-1">{children}</div>
+      <div className="mt-[7rem] flex flex-col  flex-1">{children}</div>
     </div>
   );
 };

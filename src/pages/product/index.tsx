@@ -1,6 +1,7 @@
 import { Empty, GetRating, Loader } from '@/components/common';
 import { Button } from '@/components/ui/button';
 import { formatAmount } from '@/lib/helpers';
+import { useCartStore } from '@/stores/useCartStore';
 
 import { makeApiRequest } from '@/utils/api';
 import { Minus, Plus } from 'lucide-react';
@@ -11,6 +12,8 @@ const SingleProduct = () => {
   const { productID } = useParams();
   const [isLoading, setIsLoading] = useState(false);
   const [product, setProduct] = useState<Product | null>(null);
+  const { addToCart, isInCart, increaseQty, decreaseQty, getQty } =
+    useCartStore((state) => state);
 
   useEffect(() => {
     (async () => {
@@ -35,7 +38,7 @@ const SingleProduct = () => {
       ) : !product ? (
         <Empty />
       ) : (
-        <div className="flex flex-col lg:flex-row">
+        <div className="flex flex-col mt-8 lg:flex-row bg-white-def">
           <div className="relative flex-1 w-full md:min-w-[30rem] p-10 ">
             <img
               src={product?.image}
@@ -56,21 +59,25 @@ const SingleProduct = () => {
             <p className="text-lg">{product?.description}</p>
             <div className="flex items-center gap-6">
               <div className="flex items-center border gap-2 h-full py-1 rounded-[.5rem] border-grey-900">
-                <Button variant={'ghost'}>
-                  <Plus size={24} />
+                <Button
+                  variant={'ghost'}
+                  disabled={getQty(product) === 1}
+                  onClick={() => decreaseQty(product)}
+                >
+                  <Minus size={24} />
                 </Button>
-                <span className="text-xl">3</span>
-                <Button variant={'ghost'}>
-                  <Minus />
+                <span className="text-xl">{getQty(product)}</span>
+                <Button variant={'ghost'} onClick={() => increaseQty(product)}>
+                  <Plus size={24} />
                 </Button>
               </div>
               <Button
                 variant={'outline'}
                 className="w-[20rem] py-6 "
-                disabled={actions?.isInCart(product)}
-                onClick={() => actions.addToCart(product)}
+                disabled={isInCart(product)}
+                onClick={() => addToCart(product)}
               >
-                {actions?.isInCart(product) ? 'Added To Cart' : 'Add to Cart'}
+                {isInCart(product) ? 'Added To Cart' : 'Add to Cart'}
               </Button>
             </div>
           </div>
