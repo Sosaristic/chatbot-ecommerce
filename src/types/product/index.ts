@@ -1,9 +1,9 @@
-type Rating = {
+export type Rating = {
   rate: number;
   count: number;
 };
 
-type Product = {
+export type Product = {
   id: number;
   title: string;
   price: number;

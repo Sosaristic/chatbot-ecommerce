@@ -3,6 +3,7 @@ import { GetRating } from '.';
 import { Button } from '../ui/button';
 import { useNavigate } from 'react-router-dom';
 import { useCartStore } from '@/stores/useCartStore';
+import { Product } from '@/types/product';
 
 type CardProps = {
   product: Product;
