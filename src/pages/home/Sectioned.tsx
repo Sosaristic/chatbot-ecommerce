@@ -1,4 +1,5 @@
 import { ProductCard } from '@/components/common';
+import { Product } from '@/types/product';
 
 type sectionedProps = {
   title: string;

@@ -1,6 +1,7 @@
 import { makeApiRequest } from '@/utils/api';
 import { useEffect, useState } from 'react';
 import Sectioned from './Sectioned';
+import { Product } from '@/types/product';
 
 const Home = () => {
   const [products, setProducts] = useState<Product[] | null>(null);

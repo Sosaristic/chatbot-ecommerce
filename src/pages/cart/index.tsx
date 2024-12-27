@@ -5,6 +5,7 @@ import { useCartStore } from '@/stores/useCartStore';
 import { Minus, Plus, Trash2 } from 'lucide-react';
 import Cart from '../../assets/svg/cart.svg';
 import { useNavigate } from 'react-router-dom';
+import { Product } from '@/types/product';
 
 type Props = {
   product: Product;

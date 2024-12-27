@@ -22,14 +22,7 @@ const App = () => {
       {loading && <div>Loading...</div>}
       <div className="container grid gap-10 grid-col-2 md:grid-cols-3 lg:grid-cols-4">
         {products?.map((product) => (
-          <ProductCard
-            key={product.id}
-            rating={product.rating.rate}
-            title={product.title}
-            img={product.image}
-            price={product.price}
-            count={product.rating.count}
-          />
+          <ProductCard product={product} key={product.id} />
         ))}
       </div>
     </>

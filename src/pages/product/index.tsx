@@ -2,6 +2,7 @@ import { Empty, GetRating, Loader } from '@/components/common';
 import { Button } from '@/components/ui/button';
 import { formatAmount } from '@/lib/helpers';
 import { useCartStore } from '@/stores/useCartStore';
+import { Product } from '@/types/product';
 
 import { makeApiRequest } from '@/utils/api';
 import { Minus, Plus } from 'lucide-react';
