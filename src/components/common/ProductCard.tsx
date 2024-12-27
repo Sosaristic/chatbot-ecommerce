@@ -4,6 +4,7 @@ import { Button } from '../ui/button';
 import { useNavigate } from 'react-router-dom';
 import { useCartStore } from '@/stores/useCartStore';
 import { Product } from '@/types/product';
+import Omnimart from '../../assets/images/omni-mart.jpeg';
 
 type CardProps = {
   product: Product;
@@ -21,6 +22,7 @@ const ProductCard = ({ product }: CardProps) => {
       <div className="flex justify-center">
         <img
           src={product.image}
+          defaultValue={Omnimart}
           height={100}
           width={200}
           alt=""

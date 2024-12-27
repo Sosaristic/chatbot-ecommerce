@@ -127,6 +127,7 @@ const Checkout = () => {
             <Button
               className="w-full"
               type="button"
+              disabled={totalItems() === 0}
               size={'lg'}
               onClick={() => handleSubmit()}
             >

@@ -97,6 +97,7 @@ const CartPage = () => {
           </p>
           <Button
             className="w-full"
+            disabled={items.length === 0}
             size={'lg'}
             onClick={() => navigate('/cart/checkout')}
           >
