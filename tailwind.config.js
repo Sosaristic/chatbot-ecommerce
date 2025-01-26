@@ -31,6 +31,13 @@ export default {
         background: {
           def: '#f1f1f1',
         },
+        // Sonner toast colors
+        'success-bg': 'hsl(150 100% 6%)',
+        'success-text': 'hsl(150 100% 90%)',
+        'success-border': 'hsl(147 100% 12%)',
+        'error-bg': 'hsl(358 76% 10%)',
+        'error-text': 'hsl(358 100% 81%)',
+        'error-border': 'hsl(357 89% 16%)',
       },
     },
   },

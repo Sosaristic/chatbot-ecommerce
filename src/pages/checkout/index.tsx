@@ -9,6 +9,9 @@ import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { useState } from 'react';
 import Success from '../../assets/svg/success-checkoute.svg';
+import { httpRequest } from '@/utils/makeApiRequest';
+import { toast } from 'sonner';
+import { useAppStore } from '@/stores/useAppStore';
 
 const initialValues = {
   firstName: '',
@@ -34,18 +37,51 @@ const validationSchema = yup.object<typeof initialValues>({
 });
 
 const Checkout = () => {
-  const { totalAmount, totalItems, clearCart } = useCartStore();
+  const { totalAmount, totalItems, clearCart, items } = useCartStore();
+  const { setIsLoading } = useAppStore();
+
   const [step, setStep] = useState(1);
+  const [response, setResponse] = useState<OrderResponse | null>(null);
 
   const { handleChange, values, handleBlur, handleSubmit, errors, touched } =
     useFormik({
       initialValues,
       validationSchema: validationSchema,
-      onSubmit: () => {
-        setStep(2);
-        clearCart();
+      onSubmit: (values) => {
+        handlePlaceOrder(values);
       },
     });
+
+  const handlePlaceOrder = async (values: typeof initialValues) => {
+    const payload = {
+      contact: {
+        ...values,
+      },
+      products: items,
+      totalAmount: totalAmount() * 100,
+      date: new Date().toISOString(),
+      status: 'pending',
+    };
+
+    setIsLoading(true);
+
+    const { data, error } = await httpRequest<OrderResponse>(
+      '/order/place-order',
+      'POST',
+      payload
+    );
+
+    if (data) {
+      clearCart();
+      setResponse(data);
+      setStep(2);
+    }
+    if (error) {
+      toast.error(error.message);
+    }
+
+    setIsLoading(false);
+  };
 
   return (
     <div>
@@ -139,7 +175,7 @@ const Checkout = () => {
         <div className="container flex flex-col items-center flex-1 gap-4 mt-12 ">
           <img src={Success} alt="" className="h-[15rem] w-[15rem]" />
           <p className="text-2xl text-green-500">Order placed successfully</p>
-          <p>Order Id: 45747583833938595869</p>
+          <p>Order Id: {response?.data.tracking_id}</p>
           <p>Use this Id to track your order</p>
         </div>
       )}

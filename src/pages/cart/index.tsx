@@ -30,7 +30,7 @@ const CartCard = ({ product }: Props) => {
 
         <p className="">
           <span className="font-bold"> Sub total</span>{' '}
-          {formatAmount(product.price * 100 * product.qty!)}
+          {formatAmount(product.price * 100 * product.quantity!)}
         </p>
         <div className="flex items-center gap-4">
           <Button

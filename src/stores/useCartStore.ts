@@ -26,7 +26,7 @@ export const useCartStore = create<ICart>()(
       setIsAppLoading: () => set({ isAppLoading: false }),
 
       addToCart: (product: Product) => {
-        set({ items: [...get().items, { ...product, qty: 1 }] });
+        set({ items: [...get().items, { ...product, quantity: 1 }] });
       },
       isInCart: (product: Product) => {
         return get().items.some((item) => item.id === product.id);
@@ -34,10 +34,10 @@ export const useCartStore = create<ICart>()(
       increaseQty: (product: Product) => {
         const index = get().items.findIndex((item) => item.id === product.id);
         if (index === -1) {
-          set({ items: [...get().items, { ...product, qty: 1 }] });
+          set({ items: [...get().items, { ...product, quantity: 1 }] });
         } else {
           const updatedItems = [...get().items];
-          updatedItems[index].qty = updatedItems[index].qty! + 1;
+          updatedItems[index].quantity = updatedItems[index].quantity! + 1;
           set({ items: updatedItems });
         }
       },
@@ -45,14 +45,14 @@ export const useCartStore = create<ICart>()(
         const index = get().items.findIndex((item) => item.id === product.id);
         if (index !== -1) {
           const updatedItems = [...get().items];
-          updatedItems[index].qty = updatedItems[index].qty! - 1;
+          updatedItems[index].quantity = updatedItems[index].quantity! - 1;
           set({ items: updatedItems });
         }
       },
       getQty: (product: Product) => {
         const index = get().items.findIndex((item) => item.id === product.id);
 
-        return get().items[index]?.qty || 0;
+        return get().items[index]?.quantity || 0;
       },
       deleteItem: (product: Product) => {
         const index = get().items.findIndex((item) => item.id === product.id);
@@ -64,12 +64,12 @@ export const useCartStore = create<ICart>()(
       },
       totalAmount: () => {
         return get().items.reduce((acc, item) => {
-          return acc + item.price * item.qty!;
+          return acc + item.price * item.quantity!;
         }, 0);
       },
       totalItems: () => {
         return get().items.reduce((acc, item) => {
-          return acc + item.qty!;
+          return acc + item.quantity!;
         }, 0);
       },
       clearCart: () => set({ items: [] }),
